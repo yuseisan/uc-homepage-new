@@ -3,98 +3,106 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>UC Web | 飲食店向けホームページ制作</title>
-  <meta name="description" content="写真映え × 集客導線 × 高速表示。飲食店・カフェのための“映える”モダンLP。最短1週間で公開。" />
+  <title>UC Web | 店舗の魅力をていねいに伝えるホームページ</title>
+  <meta name="description" content="写真と必要な情報をわかりやすく。予約につながる導線とアクセシビリティに配慮した、飲食店・カフェ向けホームページ制作。" />
   <meta name="theme-color" content="#0b0e13" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg:#0a0e14; --text:#f1f5f9; --muted:#9aa4b2; --panel:#101622; --brand:#4f8cff; --brand2:#9dff57; --gold:#f6c453;
-      --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+      /* カラーパレット：落ち着いたナチュラル系（AAコントラストを満たす値） */
+      --bg:#ffffff;            /* 背景 */
+      --surface:#f6f7fb;       /* セクション背景 */
+      --ink:#0b1324;           /* 本文色（コントラスト高め） */
+      --muted:#5b6476;         /* 補助テキスト */
+      --line:#d9dfeb;          /* 枠線 */
+      --brand:#2b6cb0;         /* ボタン・リンク（濃いめの藍） */
+      --brand-weak:#e6eef9;    /* 薄い藍 */
+      --accent:#946c2b;        /* アクセント（真鍮） */
+      --radius:16px;
+      --shadow:0 8px 24px rgba(0,0,0,.08);
+      --focus-ring: 3px solid #2b6cb0; /* 高コントラストなフォーカス */
     }
+
+    @media (prefers-color-scheme: dark){
+      :root{ --bg:#0b0e13; --surface:#121722; --ink:#eef2f7; --muted:#a7b0bf; --line:#273043; --brand:#79a7ff; --brand-weak:#1b2a44; --accent:#d2b278; --shadow:0 10px 30px rgba(0,0,0,.35); }
+    }
+
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter","Noto Sans JP",system-ui,-apple-system,Segoe UI,Roboto,"Hiragino Kaku Gothic ProN","Yu Gothic UI",sans-serif;}
-    a{color:inherit;text-decoration:none}
+    html{font-size:16px}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter","Noto Sans JP",system-ui,-apple-system,Segoe UI,Roboto,"Hiragino Kaku Gothic ProN","Yu Gothic UI",sans-serif;line-height:1.7;text-rendering:optimizeLegibility}
     img{max-width:100%;display:block}
-    .container{width:min(1200px,92%);margin-inline:auto}
+    a{color:var(--brand);text-underline-offset:3px}
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible{ outline:var(--focus-ring); outline-offset:3px; border-radius:10px }
 
-    /* ===== Skip link ===== */
-    .skip{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip:focus{left:12px;top:12px;width:auto;height:auto;padding:.6rem .9rem;border-radius:10px;background:#0f172a;color:#fff;z-index:1500}
+    .container{width:min(1040px,92%);margin-inline:auto}
 
-    /* ===== Header ===== */
-    header{position:sticky;top:0;z-index:100;background:rgba(10,14,20,.6);backdrop-filter:blur(10px) saturate(1.2);border-bottom:1px solid rgba(255,255,255,.08)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .brand{display:flex;gap:.6rem;align-items:center;font-weight:900;letter-spacing:.2px}
-    .logo{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:900;color:#08131f;background:linear-gradient(135deg,var(--brand),var(--brand2))}
-    .navlinks{display:flex;gap:20px;align-items:center}
-    .btn{display:inline-flex;align-items:center;gap:.55rem;padding:.7rem 1rem;border-radius:14px;font-weight:700;border:1px solid rgba(255,255,255,.12)}
-    .btn.primary{background:linear-gradient(135deg,var(--brand),#7aa7ff);color:#08131f;border:none;box-shadow:var(--shadow)}
-    .btn.ghost{background:transparent}
+    /* Skip link */
+    .skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip:focus{left:12px;top:12px;width:auto;height:auto;padding:.6rem .9rem;border-radius:10px;background:#0f172a;color:#fff;z-index:1000}
 
-    /* ===== Hero ===== */
-    .hero{position:relative;min-height:88vh;display:grid;place-items:center;overflow:hidden}
-    .hero::before{ /* background image */
-      content:"";position:absolute;inset:0;z-index:-2; 
-      background-image: url('https://images.unsplash.com/photo-1541542684-4a9c8a0f1c3a?q=80&w=2400&auto=format&fit=crop');
-      background-size:cover;background-position:center;transform:scale(1.05);filter:brightness(.6) contrast(1.05)
-    }
-    .hero::after{ /* gradient overlay */
-      content:"";position:absolute;inset:0;z-index:-1; 
-      background:radial-gradient(1000px 500px at 25% 10%, rgba(79,140,255,.35), transparent 60%),
-                 radial-gradient(800px 400px at 80% 80%, rgba(157,255,87,.25), transparent 60%),
-                 linear-gradient(180deg,rgba(10,14,20,.2),rgba(10,14,20,.8));
-    }
-    .hero-inner{text-align:center;padding:56px 0}
-    .kicker{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .7rem;border-radius:999px;background:rgba(79,140,255,.18);border:1px solid rgba(79,140,255,.35);color:#dbe7ff;font-size:.85rem}
-    h1{font-size:clamp(28px,6vw,58px);line-height:1.08;margin:.6rem 0;font-weight:900;text-wrap:balance}
-    .lead{color:var(--muted);font-size:clamp(14px,2.2vw,18px);max-width:720px;margin:0 auto 14px}
-    .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-    .glow{position:relative}
-    .glow::before{content:"";position:absolute;inset:-2px;border-radius:16px;background:conic-gradient(from 0deg, var(--brand), var(--gold), var(--brand2), var(--brand));filter:blur(12px);opacity:.45;z-index:-1;transition:.5s transform}
-    .glow:hover::before{transform:scale(1.05)}
+    /* Header */
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(8px) saturate(1.2);border-bottom:1px solid var(--line)}
+    @media (prefers-color-scheme: dark){ header{ background:rgba(11,14,19,.75); border-color:#202736 } }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;gap:.6rem;align-items:center;font-weight:800;letter-spacing:.2px}
+    .logo{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),#4f8cff);color:#08131f;font-weight:900}
+    .links{display:flex;gap:16px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;min-height:44px;padding:.6rem 1rem;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:700}
+    .btn.primary{background:var(--brand);color:#fff;border-color:transparent;box-shadow:var(--shadow)}
+    @media (prefers-color-scheme: dark){ .btn{ background:#101826; color:var(--ink); border-color:#243049 } }
 
-    /* ===== Section base ===== */
-    section{padding:72px 0}
-    .sub{color:var(--muted);margin:6px 0 18px}
+    /* Hero（写真は使わず、柔らかいグラデ背景） */
+    .hero{position:relative;overflow:hidden}
+    .hero .pad{padding:56px 0}
+    .hero-bg{position:absolute;inset:0;z-index:-1;background:radial-gradient(700px 320px at 20% 15%, var(--brand-weak), transparent 60%), radial-gradient(800px 360px at 80% 90%, #f3eadb, transparent 60%)}
+    @media (prefers-color-scheme: dark){ .hero-bg{ background:radial-gradient(800px 380px at 20% 15%, rgba(79,140,255,.18), transparent 60%), radial-gradient(800px 380px at 80% 90%, rgba(210,178,120,.16), transparent 60%) } }
 
-    /* ===== Features ===== */
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);transform:translateY(14px);opacity:0;transition:transform .7s cubic-bezier(.2,.8,.2,1), opacity .7s}
-    .card h3{margin:6px 0 8px;font-size:18px}
-    .card.reveal{transform:translateY(0);opacity:1}
+    h1{font-size:clamp(1.8rem,4.5vw,2.6rem);line-height:1.2;margin:.2rem 0 .6rem;font-weight:800;text-wrap:balance}
+    .lead{color:var(--muted);max-width:720px}
 
-    /* ===== Gallery ===== */
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .shot{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);transform:scale(.98);opacity:0;transition:transform .7s, opacity .7s}
-    .shot.reveal{transform:scale(1);opacity:1}
-    .shot img{aspect-ratio:4/3;object-fit:cover;transition:transform .6s ease}
-    .shot:hover img{transform:scale(1.06)}
+    /* Sections */
+    section{padding:48px 0}
+    .section-title{font-size:1.35rem;margin:0 0 .4rem}
+    .sub{color:var(--muted);margin:0 0 1rem}
 
-    /* ===== Pricing ===== */
-    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .plan{background:linear-gradient(180deg,#0d141f,#0f172a);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:22px;box-shadow:var(--shadow);transform:translateY(10px);opacity:0;transition:transform .7s, opacity .7s}
-    .plan.reveal{transform:translateY(0);opacity:1}
-    .badge{display:inline-block;padding:.35rem .6rem;border-radius:999px;background:#0b1220;border:1px solid rgba(255,255,255,.14);font-size:.8rem;color:#cfe0ff}
-    .price{font-size:28px;font-weight:900;margin:.4rem 0}
-    .plan ul{margin:0;padding-left:18px;color:var(--muted)}
+    /* Feature cards（控えめアニメ） */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:opacity .5s ease, transform .5s ease}
+    .card.reveal{opacity:1;transform:none}
+    .card h3{margin:.2rem 0 .4rem;font-size:1rem}
 
-    /* ===== Footer ===== */
-    footer{padding:44px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,.08)}
+    /* Gallery（代替テキスト重視） */
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .shot{border-radius:14px;overflow:hidden;border:1px solid var(--line);opacity:0;transform:scale(.98);transition:opacity .5s ease, transform .5s ease}
+    .shot.reveal{opacity:1;transform:scale(1)}
+    .shot img{aspect-ratio:4/3;object-fit:cover}
 
-    /* ===== Responsive ===== */
-    @media (max-width: 900px){
-      .features, .pricing{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(2,1fr)}
-      .navlinks{display:none}
-    }
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .plan{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:opacity .5s ease, transform .5s ease}
+    .plan.reveal{opacity:1;transform:none}
+    .badge{display:inline-block;padding:.3rem .6rem;border-radius:999px;background:var(--brand-weak);font-size:.8rem}
+    .price{font-size:1.5rem;font-weight:800;margin:.3rem 0}
+    .plan ul{margin:0;padding-left:1rem;color:var(--muted)}
 
-    /* ===== Reduced motion ===== */
-    @media (prefers-reduced-motion: reduce){
-      .card, .shot, .plan{transition:none}
-    }
+    /* Contact form */
+    form{display:grid;gap:10px;max-width:680px}
+    label{font-weight:600}
+    .req{color:#cc0022;margin-left:.25rem}
+    input, textarea{border:1px solid var(--line);border-radius:12px;padding:.7rem 1rem;background:#fff;color:var(--ink)}
+    @media (prefers-color-scheme: dark){ input, textarea{ background:#0f172a; color:#eef2f7; border-color:#26334a } }
+    .hint{color:var(--muted);font-size:.95rem}
+    .error{color:#b00020}
+
+    footer{padding:38px 0;border-top:1px solid var(--line);color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 900px){ .features, .pricing{grid-template-columns:1fr} .grid{grid-template-columns:repeat(2,1fr)} }
+
+    /* Motion reduce */
+    @media (prefers-reduced-motion: reduce){ .card, .shot, .plan{transition:none} }
   </style>
 </head>
 <body>
@@ -105,70 +113,67 @@
         <span class="logo" aria-hidden="true">UC</span>
         <span>UC Web</span>
       </a>
-      <nav class="navlinks" aria-label="主要リンク">
-        <a href="#features" class="btn ghost">特徴</a>
-        <a href="#works" class="btn ghost">実績</a>
-        <a href="#pricing" class="btn ghost">料金</a>
-        <a href="#contact" class="btn primary glow">無料相談</a>
+      <nav class="links" aria-label="主要リンク">
+        <a class="btn" href="#features">特徴</a>
+        <a class="btn" href="#works">実績</a>
+        <a class="btn" href="#pricing">料金</a>
+        <a class="btn primary" href="#contact">無料相談</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- ===== HERO ===== -->
+    <!-- HERO -->
     <section class="hero" aria-labelledby="h1">
-      <div class="hero-inner container">
-        <span class="kicker" aria-label="提供価値">📈 集客導線 × 写真映え × スマホ最適化</span>
-        <h1 id="h1">“予約が増える” 飲食店サイトを、最短1週間で。</h1>
-        <p class="lead">一枚の写真で店の魅力を伝え、迷わない導線で予約へ。高速表示・SEO・アクセシビリティまでフル装備のモダンLP。</p>
-        <div class="cta-row">
-          <a href="#contact" class="btn primary glow">無料相談を予約</a>
-          <a href="#works" class="btn ghost">実績を見る</a>
-        </div>
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container pad">
+        <h1 id="h1">お店の魅力を、ていねいに伝えるホームページ。</h1>
+        <p class="lead">写真と必要な情報を整理して、迷わない導線をつくります。スマホ最適化・読み上げ対応・コントラストなど、アクセシビリティも考えた設計です。</p>
+        <p style="margin-top:12px"><a class="btn primary" href="#contact">無料相談を予約する</a></p>
       </div>
     </section>
 
-    <!-- ===== FEATURES ===== -->
+    <!-- FEATURES -->
     <section class="container" id="features" aria-labelledby="f-title">
-      <h2 id="f-title">選ばれる理由</h2>
-      <p class="sub">視認性（AAコントラスト）、44pxターゲット、キーボード操作、代替テキスト対応。実装も運用も任せられる。</p>
+      <h2 id="f-title" class="section-title">できること</h2>
+      <p class="sub">見た目だけでなく、読みやすさ・操作しやすさ・更新のしやすさを大切にしています。</p>
       <div class="features" role="list">
         <article class="card" role="listitem">
-          <h3>写真で惹きつける</h3>
-          <p>料理・外観・店内の“推せる一枚”をヒーローに。色気のあるレタッチとレイアウトで没入感を演出。</p>
+          <h3>読みやすい文字とレイアウト</h3>
+          <p>本文は十分なサイズと行間。色はAAコントラストを満たす値を採用。長文でも目が滑りにくい設計です。</p>
         </article>
         <article class="card" role="listitem">
-          <h3>予約に直結する導線</h3>
-          <p>ファーストビューから3タップで予約へ。CTAの位置・文言・サイズをABテストで最適化。</p>
+          <h3>迷わない導線</h3>
+          <p>予約・メニュー・アクセスなど、よく使う導線を整理。ボタンは44px以上でタップしやすく。</p>
         </article>
         <article class="card" role="listitem">
-          <h3>高速 & SEO / A11y</h3>
-          <p>軽量実装・画像最適化・セマンティックHTMLで、読み込みも検索評価も◎。</p>
+          <h3>アクセシビリティ対応</h3>
+          <p>スキップリンク、フォーカス可視化、キーボード操作、代替テキスト、モーション軽減に対応。</p>
         </article>
       </div>
     </section>
 
-    <!-- ===== GALLERY ===== -->
+    <!-- GALLERY -->
     <section class="container" id="works" aria-labelledby="w-title">
-      <h2 id="w-title">制作実績（イメージ）</h2>
-      <p class="sub">背景はフリー写真（Unsplash）で代用。公開時はあなたの写真に差し替え。</p>
+      <h2 id="w-title" class="section-title">イメージ（ダミー写真）</h2>
+      <p class="sub">公開時は店舗写真に差し替えます。各画像には内容が伝わる代替テキストを付与します。</p>
       <div class="grid">
-        <figure class="shot"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1200&auto=format&fit=crop" alt="炭火焼きハンバーグのアップ" loading="lazy" width="600" height="450"></figure>
-        <figure class="shot"><img src="https://images.unsplash.com/photo-1541542684-4a9c8a0f1c3a?q=80&w=1200&auto=format&fit=crop" alt="カフェラテと焼き菓子のテーブルフォト" loading="lazy" width="600" height="450"></figure>
-        <figure class="shot"><img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?q=80&w=1200&auto=format&fit=crop" alt="夜の店舗外観" loading="lazy" width="600" height="450"></figure>
-        <figure class="shot"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?q=80&w=1200&auto=format&fit=crop" alt="ランチプレート" loading="lazy" width="600" height="450"></figure>
+        <figure class="shot"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1200&auto=format&fit=crop" alt="炭火焼きハンバーグのアップ" width="600" height="450" loading="lazy"></figure>
+        <figure class="shot"><img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?q=80&w=1200&auto=format&fit=crop" alt="ランチプレート：サラダとスープ付き" width="600" height="450" loading="lazy"></figure>
+        <figure class="shot"><img src="https://images.unsplash.com/photo-1541542684-4a9c8a0f1c3a?q=80&w=1200&auto=format&fit=crop" alt="カフェラテと焼き菓子のテーブルフォト" width="600" height="450" loading="lazy"></figure>
+        <figure class="shot"><img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?q=80&w=1200&auto=format&fit=crop" alt="夜の店舗外観（暖色の照明）" width="600" height="450" loading="lazy"></figure>
       </div>
     </section>
 
-    <!-- ===== PRICING ===== -->
+    <!-- PRICING -->
     <section class="container" id="pricing" aria-labelledby="p-title">
-      <h2 id="p-title">料金プラン</h2>
+      <h2 id="p-title" class="section-title">料金</h2>
       <div class="pricing" role="list">
         <article class="plan" role="listitem">
           <span class="badge">ライト</span>
           <div class="price">¥99,000〜</div>
           <ul>
-            <li>シングルページ</li>
+            <li>1ページ構成</li>
             <li>基本SEO / A11y</li>
             <li>スマホ最適化</li>
           </ul>
@@ -194,25 +199,31 @@
       </div>
     </section>
 
-    <!-- ===== CONTACT ===== -->
+    <!-- CONTACT -->
     <section class="container" id="contact" aria-labelledby="c-title">
-      <h2 id="c-title">無料相談</h2>
-      <p class="sub">2営業日以内にご連絡します。*は必須項目</p>
-      <form aria-describedby="c-hint c-status" style="display:grid;gap:12px;max-width:680px">
-        <p id="c-hint" class="sub" style="margin:.2rem 0">名前・メール・相談内容を入力し送信してください。</p>
-        <label for="name">お名前 *</label>
+      <h2 id="c-title" class="section-title">無料相談</h2>
+      <p class="sub">2営業日以内にご連絡します。<span class="req" aria-hidden="true">*</span>は必須項目です。</p>
+      <form aria-describedby="c-hint c-status" novalidate>
+        <p id="c-hint" class="hint">名前・メール・相談内容を入力し、送信してください。</p>
+        <label for="name">お名前 <span class="req" aria-hidden="true">*</span></label>
         <input id="name" name="name" type="text" required autocomplete="name" aria-required="true" />
-        <label for="email">メールアドレス *</label>
+        <span id="err-name" class="error" role="alert" aria-live="polite"></span>
+
+        <label for="email">メールアドレス <span class="req" aria-hidden="true">*</span></label>
         <input id="email" name="email" type="email" required autocomplete="email" aria-required="true" />
-        <label for="msg">ご相談内容 *</label>
+        <span id="err-email" class="error" role="alert" aria-live="polite"></span>
+
+        <label for="msg">ご相談内容 <span class="req" aria-hidden="true">*</span></label>
         <textarea id="msg" name="message" rows="5" required aria-required="true"></textarea>
-        <button class="btn primary glow" type="submit">送信する</button>
-        <div id="c-status" role="status" aria-live="polite" style="height:1.2rem"></div>
+        <span id="err-msg" class="error" role="alert" aria-live="polite"></span>
+
+        <button class="btn primary" type="submit">送信する</button>
+        <div id="c-status" role="status" aria-live="polite" class="hint" style="min-height:1.2rem"></div>
       </form>
     </section>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     <div class="container" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
       <p style="margin:0">&copy; <span id="year"></span> UC Web</p>
       <p style="margin:0"><a href="tel:+810000000000">電話</a> / <a href="mailto:contact@example.com">メール</a></p>
@@ -223,26 +234,32 @@
     // 年表示
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Intersection Observer でスクロール時アニメーション
+    // Intersection Observer で控えめアニメーション
     const reveal = (selector) => {
       const els = document.querySelectorAll(selector);
       const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target); }
-        });
-      }, { threshold: .18 });
+        entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target); } });
+      }, { threshold: .15 });
       els.forEach(el => io.observe(el));
-    }
+    };
     reveal('.card');
     reveal('.shot');
     reveal('.plan');
 
-    // フォーム送信のダミー
+    // フォームの簡易バリデーション（エラーを明示）
     const form = document.querySelector('form');
-    const status = document.getElementById('c-status');
-    form?.addEventListener('submit', (e)=>{
+    const setErr = (id, msg) => { const el=document.getElementById(id); if(el){ el.textContent=msg; }}
+    form?.addEventListener('submit',(e)=>{
       e.preventDefault();
-      status.textContent = '送信しました。担当者よりご連絡します。';
+      setErr('err-name',''); setErr('err-email',''); setErr('err-msg','');
+      let ok = true;
+      if(!document.getElementById('name').value.trim()){ setErr('err-name','お名前を入力してください。'); ok=false; }
+      const email = document.getElementById('email').value.trim();
+      if(!email){ setErr('err-email','メールアドレスを入力してください。'); ok=false; }
+      else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ setErr('err-email','メールアドレスの形式を確認してください。'); ok=false; }
+      if(!document.getElementById('msg').value.trim()){ setErr('err-msg','ご相談内容を入力してください。'); ok=false; }
+      const status = document.getElementById('c-status');
+      status.textContent = ok ? '送信しました。担当者よりご連絡します。' : '';
     });
   </script>
 </body>
